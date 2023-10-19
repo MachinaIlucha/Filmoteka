@@ -1,2 +1,16 @@
+// NORMALIZE
+@import '~node_modules/modern-normalize/modern-normalize.css';
+
+@import './utils/variables';
+@import './utils/mixin';
+
+@import './base/globalStyles';
+@import './base/colors';
+@import './base/container';
 @import './common';
 @import './example';
+
+@import './components/header';
+@import './components/footer';
+@import './components/gallery';
+@import './components/pagination';

@@ -1,0 +1,155 @@
+/* Base Classes */
+.tui-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pagination-btns {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+  color: black;
+}
+
+.pagination-section {
+  padding-top: 6px;
+  padding-bottom: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Active Button Styles */
+.pagination-active-button {
+  width: 40px;
+  height: 40px;
+  padding-top: 13px;
+  padding-bottom: 13px;
+  margin-left: 0;
+  margin-right: 10px;
+  display: inline-block;
+  position: relative;
+  text-align: center;
+  vertical-align: middle;
+  color: getColor('white');
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  text-decoration: none;
+  border-radius: 5px;
+  background-color: getColor('secondary-text-color');
+}
+
+/* Page Button Styles */
+.pagination-page-button {
+  width: 28px;
+  padding: 8px 0 6px;
+  margin-left: 0;
+  margin-right: 10px;
+  display: inline-block;
+  position: relative;
+  vertical-align: middle;
+  color: inherit;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  text-decoration: none;
+  border-width: 1px 0;
+  border-radius: 5px;
+  background-color: transparent;
+  transition: background-color 250ms cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.pagination-page-button:hover {
+  background-color: rgba(128, 128, 128, 0.527);
+}
+
+/* Next and Disabled Button Styles */
+.pagination-next-button {
+  border: none;
+  margin-right: 10px;
+  margin-left: 10px;
+  color: #000000;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  position: sticky;
+  border-radius: 5px;
+  width: 40px;
+  height: 40px;
+  background-color: #f7f7f7;
+}
+
+.pagination-disabled-button {
+  border: none;
+  margin-right: 10px;
+  margin-left: 10px;
+  color: #000000;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  position: sticky;
+  border-radius: 5px;
+  width: 40px;
+  height: 40px;
+}
+
+/* More Button Styles */
+.pagination-more-button {
+  width: 40px;
+  height: 40px;
+  padding: 8px 0 6px;
+  margin-left: 10px;
+  margin-right: 10px;
+  display: inline-flex;
+  vertical-align: middle;
+  justify-content: center;
+  align-items: center;
+  color: inherit;
+  font-size: 12px;
+  font-weight: normal;
+  line-height: 1;
+  text-decoration: none;
+  background-color: transparent;
+}
+
+/* Icon Styles */
+.pag-ico-more,
+.pag-ico-next,
+.pag-ico-prev,
+.pag-ico-first,
+.pag-ico-last {
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.pag-ico-more {
+  color: getColor('white');
+  background-image: url(../images/dots.svg);
+  width: 10px;
+  height: 10px;
+}
+
+.pag-ico-next,
+.pag-ico-prev {
+  background-image: url(../images/arrow-left.svg);
+  width: 16px;
+  height: 16px;
+}
+
+.pag-ico-prev {
+  transform: scale(-1);
+}
+
+.pag-ico-first,
+.pag-ico-last {
+  background-image: url(../images/double-arrow.svg);
+  width: 10px;
+  height: 10px;
+}
+
+.pag-ico-first {
+  transform: scale(-1);
+}

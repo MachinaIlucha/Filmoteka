@@ -1,0 +1,113 @@
+.gallery__container {
+  padding: 60px 32px;
+  width: 1280px;
+
+  ::-webkit-scrollbar {
+    width: 20px;
+  }
+
+  ::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey;
+    border-radius: 10px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: red;
+    border-radius: 10px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #b30000;
+  }
+}
+
+.gallery__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.photo__card {
+  position: relative;
+  display: block;
+  width: calc((100% - 32px) / 3);
+  cursor: pointer;
+  transition: filter 300ms ease-in-out;
+
+  &:hover,
+  &:focus {
+    .movie__rating {
+      filter: drop-shadow(0px 2px 2px getColor(primary-text-color));
+    }
+    .film__title {
+      transform: scale(1.01);
+    }
+    .movie__image {
+      filter: drop-shadow(1px 1px 15px getColor(secondary-text-color));
+    }
+  }
+}
+
+.movie__image {
+  border-radius: 5px;
+  width: 100%;
+  max-width: 395px;
+  height: 575px;
+
+  object-fit: cover;
+  transition: filter 300ms ease-in-out;
+}
+
+.movie__info {
+  padding-bottom: 16px;
+  padding-top: 12px;
+  display: flex;
+  flex-direction: column;
+}
+
+.movie__title,
+.movie__genre,
+.movie__year {
+  font-family: inherit;
+  font-weight: 500;
+  font-size: 19.5px;
+  line-height: 1.2;
+}
+
+.movie__details {
+  display: flex;
+  gap: 4px;
+}
+
+.film__title {
+  text-transform: uppercase;
+  transition-property: transform;
+  transition-duration: 300ms;
+  transition-timing-function: ease-in-out;
+
+  font-weight: 500;
+  font-size: 20px;
+  line-height: calc(24 / 20);
+}
+.movie__genre,
+.movie__year {
+  color: getColor(secondary-text-color);
+}
+
+.movie__rating {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: 50px;
+  height: 25px;
+  background-color: getColor(secondary-text-color);
+  border-radius: 5px;
+  padding: 1px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 19px;
+}
+
+.movie__rating {
+  transition: filter 300ms ease-in-out;
+}

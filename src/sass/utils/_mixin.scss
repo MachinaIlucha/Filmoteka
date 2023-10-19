@@ -1,0 +1,13 @@
+$media-min: (
+  desktop: 1280px,
+);
+
+@mixin media-min($breakpoint) {
+  @each $breakpoints, $size in $media-min {
+    @if $breakpoint==$breakpoints {
+      @media screen and (min-width: $size) {
+        @content;
+      }
+    }
+  }
+}
