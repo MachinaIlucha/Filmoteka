@@ -1,4 +1,4 @@
-import { fetchFilmById, fetchFilmTrailer } from './api/movieApi';
+import { fetchFilmById, fetchFilmTrailer } from './api/movieAPI';
 import { ref } from './references';
 import sprite from '../images/sprite.svg';
 
