@@ -1,4 +1,5 @@
 import axios from 'axios';
+
 import {
   API_KEY,
   TREND_URL,
@@ -10,10 +11,35 @@ import {
   DISCOVER,
 } from './apiVars';
 
-export async function fetchTrendedFilms(page = 1) {
+function createUrlWithParams(baseURL, params = {}) {
   const searchParams = new URLSearchParams({
     api_key: API_KEY,
-    page: page,
+    ...params,
   });
-  return axios.get(`${TREND_URL}?${searchParams}`);
+  return `${baseURL}?${searchParams.toString()}`;
+}
+
+export async function fetchTrendedFilms(page = 1) {
+  const url = createUrlWithParams(TREND_URL, { page });
+  return axios.get(url);
+}
+
+export async function fetchFilmGenres() {
+  const url = createUrlWithParams(GENRE_URL);
+  return axios.get(url);
+}
+
+export async function fetchFilmById(id) {
+  const url = createUrlWithParams(`${ID_URL}${id}`);
+  return axios.get(url);
+}
+
+export async function fetchFilmTrailer(id) {
+  const url = createUrlWithParams(`${ID_URL}/${id}/videos`);
+  return axios.get(url);
+}
+
+export async function fetchSearchedFilms(content, page = 1) {
+  const url = createUrlWithParams(SEARCH_URL, { query: content, page });
+  return axios.get(url);
 }

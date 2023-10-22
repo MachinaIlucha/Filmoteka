@@ -1,3 +1,8 @@
+html,
+body {
+  scroll-behavior: smooth;
+}
+
 html {
   ::-webkit-scrollbar {
     width: 20px;

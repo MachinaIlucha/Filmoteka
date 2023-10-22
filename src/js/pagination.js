@@ -2,7 +2,7 @@ import Pagination from 'tui-pagination';
 import 'tui-pagination/dist/tui-pagination.css';
 
 import { ref } from './references';
-import { fetchAndRenderPopularFilm } from './render/renderTrendingFilms.js';
+import { fetchAndRenderPopularFilm } from './render/renderTrendingFilms';
 
 const options = {
   totalItems: 200,
@@ -37,7 +37,7 @@ pagination.on('afterMove', onPaginationMove);
 function onPaginationMove({ page }) {
   ref.galleryList.innerHTML = '';
   fetchAndRenderPopularFilm(page);
-  // renderSearchFilms(page)
+
   window.scrollTo({
     top: 0,
     behavior: 'smooth',
