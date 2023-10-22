@@ -2,7 +2,7 @@ import { Notify } from 'notiflix';
 
 import { ref } from './references';
 import { insertMovieMarkup } from './render/renderSearchFilms';
-import { renderPopularFilms } from './render/renderTrendingFilms';
+import { fetchAndRenderPopularFilm } from './render/renderTrendingFilms';
 import { fetchSearchedFilms } from './api/movieAPI';
 
 export { renderSearchFilms };
@@ -21,7 +21,7 @@ function onCLickSubmit(e) {
     ref.input.value = '';
     renderSearchFilms();
   } else {
-    renderPopularFilms();
+    fetchAndRenderPopularFilm();
   }
 }
 
