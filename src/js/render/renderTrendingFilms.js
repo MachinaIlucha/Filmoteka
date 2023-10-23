@@ -2,6 +2,10 @@ import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 import { fetchTrendedFilms, fetchFilmGenres } from '../api/movieAPI';
 import { ref } from '../references';
+import {
+  switchToDefaultMode,
+  updateTotalItems,
+} from '../pagination/pagination';
 
 export { fetchAndRenderPopularFilm };
 
@@ -17,10 +21,14 @@ async function fetchAndRenderPopularFilm(page) {
     }
 
     const {
-      data: { results: films },
+      data: { results: films, total_results: total_results },
     } = await fetchTrendedFilms(page);
     const markup = generateFilmsMarkup(films, cachedGenres);
     ref.galleryList.innerHTML = markup;
+
+    // pagination
+    updateTotalItems(total_results, page);
+    switchToDefaultMode();
   } catch (error) {
     console.error('Failed to fetch and render popular films:', error.message);
     Notify.failure('Failed to fetch and render popular films.');
