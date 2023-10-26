@@ -1,4 +1,12 @@
 import { fetchFilmById, fetchFilmTrailer } from './api/movieAPI';
+import {
+  saveFilmToWatchedLocalStorage,
+  saveFilmToQueueLocalStorage,
+  isFilmInWatchedLocalStorage,
+  isFilmInQueueLocalStorage,
+  removeFilmFromWatchedLocalStorage,
+  removeFilmFromQueueLocalStorage,
+} from './myLibrary/localStorage';
 import { ref } from './references';
 import sprite from '../images/sprite.svg';
 
@@ -25,6 +33,37 @@ async function openModal(item) {
   renderBackdrop(response);
   ref.modalWrap.insertAdjacentHTML('afterBegin', renderMarkupModal(response));
 
+  // Buttons logic
+  const modalBtnAddWatched = document.querySelector('.modal-btn[data-watched]');
+  const modalBtnRemoveWatched = document.querySelector(
+    '.modal-btn[data-watched-rem]'
+  );
+  const modalBtnAddQueue = document.querySelector('.modal-btn[data-queue]');
+  const modalBtnRemoveQueue = document.querySelector(
+    '.modal-btn[data-queue-rem]'
+  );
+
+  modalBtnAddWatched.addEventListener('click', toggleWatched);
+  modalBtnRemoveWatched.addEventListener('click', toggleWatched);
+  modalBtnAddQueue.addEventListener('click', toggleQueue);
+  modalBtnRemoveQueue.addEventListener('click', toggleQueue);
+
+  if (isFilmInWatchedLocalStorage(id)) {
+    modalBtnAddWatched.classList.add('hidden');
+    modalBtnRemoveWatched.classList.remove('hidden');
+  } else {
+    modalBtnAddWatched.classList.remove('hidden');
+    modalBtnRemoveWatched.classList.add('hidden');
+  }
+
+  if (isFilmInQueueLocalStorage(id)) {
+    modalBtnAddQueue.classList.add('hidden');
+    modalBtnRemoveQueue.classList.remove('hidden');
+  } else {
+    modalBtnAddQueue.classList.remove('hidden');
+    modalBtnRemoveQueue.classList.add('hidden');
+  }
+
   const btnTreil = document.querySelector('.modal-btn-trailer');
   const wrapIMG = document.querySelector('.modal-img-wrap');
   btnTreil.addEventListener('click', onClickWatch);
@@ -43,6 +82,26 @@ async function openModal(item) {
       renderTrail(response.results[officialTrail])
     );
   }
+
+  function toggleWatched() {
+    if (isFilmInWatchedLocalStorage(id)) {
+      removeFilmFromWatchedLocalStorage(id);
+    } else {
+      saveFilmToWatchedLocalStorage(id);
+    }
+    modalBtnAddWatched.classList.toggle('hidden');
+    modalBtnRemoveWatched.classList.toggle('hidden');
+  }
+
+  function toggleQueue() {
+    if (isFilmInQueueLocalStorage(id)) {
+      removeFilmFromQueueLocalStorage(id);
+    } else {
+      saveFilmToQueueLocalStorage(id);
+    }
+    modalBtnAddQueue.classList.toggle('hidden');
+    modalBtnRemoveQueue.classList.toggle('hidden');
+  }
 }
 
 function closeModal(e) {
@@ -50,7 +109,7 @@ function closeModal(e) {
     return;
   }
 
-  const { movieModal, modalWrap, libraryWatchedBtn, libraryQueueBtn } = ref;
+  const { movieModal, modalWrap } = ref;
   const backdrop = document.querySelector('.backdrop-info');
 
   movieModal.classList.toggle('is-hidden');
@@ -141,7 +200,7 @@ function renderMarkupModal({
           <button type="button" class="modal-btn" data-watched="${id}">
             Add to watched
           </button>
-			 <button type="button" class="modal-btn modal-btn-rem" data-watched-rem="${id}">
+			 <button type="button" class="modal-btn modal-btn-rem hidden" data-watched-rem="${id}">
 		 Remove from watched
           </button>
 			 </div>
@@ -149,7 +208,7 @@ function renderMarkupModal({
           <button type="button" class="modal-btn" data-queue="${id}">
             Add to queue
           </button>
-			 <button type="button" class="modal-btn modal-btn-rem" data-queue-rem="${id}">
+			 <button type="button" class="modal-btn modal-btn-rem hidden" data-queue-rem="${id}">
 		 Remove from queue
           </button>
 			 </div>

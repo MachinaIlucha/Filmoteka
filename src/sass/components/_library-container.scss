@@ -1,0 +1,24 @@
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+  flex: 1;
+}
+
+.visually-hidden,
+.is-hidden {
+  display: none !important;
+}
+
+.not-img-stile {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.library__text-wrap {
+  color: #ff6b01;
+}

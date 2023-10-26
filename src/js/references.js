@@ -7,6 +7,10 @@ const ref = {
   closeModalBtn: document.querySelector('[data-modal-close]'),
   form: document.querySelector('.search-form'),
   input: document.querySelector('.form__field'),
+  libraryGalleryList: document.querySelector('#movie-list'),
+  btnLibraryWatched: document.querySelector('#library-watched'),
+  btnLibraryQueue: document.querySelector('#library-queue'),
+  notImgStile: document.querySelector('.not-img-stile'),
 };
 
 export { ref };
