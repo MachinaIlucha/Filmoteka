@@ -5,6 +5,7 @@ import { insertMovieMarkup } from './render/renderSearchFilms';
 import { fetchAndRenderPopularFilm } from './render/renderTrendingFilms';
 import { fetchSearchedFilms } from './api/movieAPI';
 import { switchToSearchMode, updateTotalItems } from './pagination/pagination';
+import { clearGallery } from './utils/utils';
 
 export { renderSearchFilms };
 
@@ -38,7 +39,7 @@ async function renderSearchFilms(page) {
         'Search result not successful. Enter the correct movie name!'
       );
     }
-    clearGallery();
+    clearGallery;
     insertMovieMarkup(ref, data);
 
     // pagination
@@ -48,8 +49,4 @@ async function renderSearchFilms(page) {
   } catch (error) {
     console.log(error);
   }
-}
-
-function clearGallery() {
-  ref.galleryList.innerHTML = '';
 }

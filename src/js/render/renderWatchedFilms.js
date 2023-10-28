@@ -4,16 +4,30 @@ import { insertMovieMarkup } from './renderSearchFilms';
 import { fetchFilmById } from '../api/movieAPI';
 import { ref } from '../references';
 
-ref.btnLibraryWatched.addEventListener('click', () =>
-  fetchAndRenderFilms(getWatchedFilmIds, 'watched')
-);
-ref.btnLibraryQueue.addEventListener('click', () =>
-  fetchAndRenderFilms(getQueueFilmIds, 'queued')
-);
+fetchAndRenderFilms(getWatchedFilmIds, 'watched');
+
+ref.btnLibraryWatched.addEventListener('click', () => {
+  ref.btnLibraryWatched.classList.add('header-library__btn-active');
+  ref.btnLibraryQueue.classList.remove('header-library__btn-active');
+  fetchAndRenderFilms(getWatchedFilmIds, 'watched');
+});
+ref.btnLibraryQueue.addEventListener('click', () => {
+  ref.btnLibraryQueue.classList.add('header-library__btn-active');
+  ref.btnLibraryWatched.classList.remove('header-library__btn-active');
+  fetchAndRenderFilms(getQueueFilmIds, 'queued');
+});
 
 async function fetchAndRenderFilms(getFilmIdsFunction, type) {
   try {
     const filmIds = await getFilmIdsFunction();
+
+    if (filmIds.length === 0) {
+      ref.notImgStile.classList.remove('is-hidden');
+
+      clearGallery();
+      Notify.info('No films found in this category.');
+      return;
+    }
 
     const films = await Promise.all(
       filmIds.map(id => fetchFilmById(id).then(item => item.data))
@@ -30,4 +44,8 @@ async function fetchAndRenderFilms(getFilmIdsFunction, type) {
     console.error(`Failed to fetch and render ${type} films:`, error.message);
     Notify.failure(`Failed to fetch and render ${type} films.`);
   }
+}
+
+function clearGallery() {
+  ref.libraryGalleryList.innerHTML = '';
 }

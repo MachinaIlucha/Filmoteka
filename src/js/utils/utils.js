@@ -45,3 +45,7 @@ export async function ensureGenresAreCached() {
   }
   return cachedGenres;
 }
+
+export function clearGallery() {
+  ref.galleryList.innerHTML = '';
+}
