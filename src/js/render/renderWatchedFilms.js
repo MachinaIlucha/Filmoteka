@@ -25,7 +25,6 @@ async function fetchAndRenderFilms(getFilmIdsFunction, type) {
       ref.notImgStile.classList.remove('is-hidden');
 
       clearGallery();
-      Notify.info('No films found in this category.');
       return;
     }
 
@@ -48,4 +47,18 @@ async function fetchAndRenderFilms(getFilmIdsFunction, type) {
 
 function clearGallery() {
   ref.libraryGalleryList.innerHTML = '';
+}
+
+ref.closeModalBtn.addEventListener('click', handleModalEvent);
+ref.movieModal.addEventListener('keydown', handleModalEvent);
+ref.movieModal.addEventListener('click', handleModalEvent);
+
+function handleModalEvent() {
+  if (ref.btnLibraryWatched.classList.contains('header-library__btn-active')) {
+    fetchAndRenderFilms(getWatchedFilmIds, 'watched');
+  } else if (
+    ref.btnLibraryQueue.classList.contains('header-library__btn-active')
+  ) {
+    fetchAndRenderFilms(getQueueFilmIds, 'queued');
+  }
 }
